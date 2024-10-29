@@ -2,7 +2,7 @@ import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/sonner";
-import { Amplify } from 'aws-amplify';
+import Amplify from 'aws-amplify';
 import awsExports from '../src/aws-exports'; // Adjust the path as necessary
 
 const outfit = Outfit({ subsets: ["latin"] });

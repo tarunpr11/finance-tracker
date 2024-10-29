@@ -1,6 +1,22 @@
-import { SignIn } from "@clerk/nextjs";
+import { Auth } from "aws-amplify";
+import { useState } from "react";
 
 export default function Page() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    try {
+      await Auth.signIn(email, password);
+      // Redirect or show success message
+      console.log("Sign in successful");
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   return (
     <section className="bg-white">
       <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
@@ -43,7 +59,49 @@ export default function Page() {
               </p>
             </div>
 
-            <SignIn />
+            {error && <p className="text-red-500">{error}</p>}
+
+            <form onSubmit={handleSignIn} className="mt-8 space-y-4">
+              <div>
+                <label className="text-gray-700" htmlFor="email">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-blue-200"
+                />
+              </div>
+              <div>
+                <label className="text-gray-700" htmlFor="password">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-blue-200"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-700 transition"
+              >
+                Sign In
+              </button>
+            </form>
+
+            <p className="mt-4 text-center text-gray-600">
+              Don’t have an account?{" "}
+              <a href="/signup" className="text-blue-600 hover:underline">
+                Sign up
+              </a>
+            </p>
           </div>
         </main>
       </div>

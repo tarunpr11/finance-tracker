@@ -1,3 +1,5 @@
+"use client"; // Add this line
+
 import { Auth } from "aws-amplify";
 import { useState } from "react";
 

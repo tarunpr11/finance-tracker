@@ -11,7 +11,7 @@ const askAdvice = async (totalBudget, totalIncome, totalSpend, input) => {
       - Total Budget: Rs.${totalBudget}  
       - Expenses: Rs.${totalSpend}  
       - Incomes: Rs.${totalIncome} 
-      Answer the user input only if it is related to finance. Answer in two to three lines
+      Answer the user input only if it is related to finance. Answer in two to three lines. If question not related to finance respond "I am a finance assistant, I can only help you with financial assistance! Kindly ask me something related to finance".
     `;
 
     const result = await model.generateContent(userPrompt);

@@ -7,10 +7,14 @@ import Link from "next/link";
 function Header() {
   const { user, isSignedIn } = useUser();
   return (
-    <div className="p-5 flex justify-between items-center border shadow-sm">
+    <div className="p-5 flex justify-between items-center shadow-sm rounded-bl-lg rounded-br-lg">
       <div className="flex flex-row items-center">
-        <Image src={"/chart-donut.svg"} alt="logo" width={40} height={25} />
-        <span className="text-blue-800  font-bold text-xl">FinanSmart</span>
+        <span
+          className="font-bold text-3xl"
+          style={{ color: "rgb(79, 104, 181)" }}
+        >
+          BetaSid Finance
+        </span>
       </div>
       {isSignedIn ? (
         <UserButton />
@@ -22,7 +26,12 @@ function Header() {
             </Button>
           </Link>
           <Link href={"/sign-in"}>
-            <Button className="rounded-full">Get Started</Button>
+            <button
+              class="rounded-full py-3 px-3"
+              style={{ backgroundColor: "rgb(173, 186, 218)" }}
+            >
+              Get Started
+            </button>
           </Link>
         </div>
       )}

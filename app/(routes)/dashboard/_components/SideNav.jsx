@@ -38,24 +38,6 @@ function SideNav() {
       icon: ReceiptText,
       path: "/dashboard/expenses",
     },
-    // {
-    //   id: 2,
-    //   name: "Investments",
-    //   icon: TrendingUp,
-    //   path: "/dashboard/investments",
-    // },
-    // {
-    //   id: 2,
-    //   name: "Debts",
-    //   icon: TrendingDownIcon,
-    //   path: "/dashboard/debts",
-    // },
-    {
-      id: 4,
-      name: "Upgrade",
-      icon: ShieldCheck,
-      path: "/dashboard/upgrade",
-    },
   ];
   const path = usePathname();
 
@@ -63,7 +45,7 @@ function SideNav() {
     console.log(path);
   }, [path]);
   return (
-    <div className="h-screen p-5 border shadow-sm">
+    <div className="h-screen p-5 border shadow-sm bg-purple-100">
       {/* <Image src={'/logo.svg'}
         alt='logo'
         width={160}
@@ -71,7 +53,7 @@ function SideNav() {
         /> */}
       <div className="flex flex-row items-center">
         <Image src={"./chart-donut.svg"} alt="logo" width={40} height={25} />
-        <span className="text-blue-800 font-bold text-xl">FinanSmart</span>
+        <span className="text-blue-800 font-bold text-xl">BetaSid Finances</span>
       </div>
       <div className="mt-5">
         {menuList.map((menu, index) => (
@@ -90,13 +72,6 @@ function SideNav() {
             </h2>
           </Link>
         ))}
-      </div>
-      <div
-        className="fixed bottom-10 p-5 flex gap-2
-            items-center"
-      >
-        <UserButton />
-        Profile
       </div>
     </div>
   );

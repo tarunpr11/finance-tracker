@@ -1,5 +1,6 @@
 import formatNumber from "@/utils";
 import getFinancialAdvice from "@/utils/getFinancialAdvice";
+import askAdvice from "@/utils/askAdvice";
 import {
   PiggyBank,
   ReceiptText,
@@ -14,6 +15,7 @@ function CardInfo({ budgetList, incomeList }) {
   const [totalSpend, setTotalSpend] = useState(0);
   const [totalIncome, setTotalIncome] = useState(0);
   const [financialAdvice, setFinancialAdvice] = useState("");
+  const [inputText, setInputText] = useState("");
 
   useEffect(() => {
     if (budgetList.length > 0 || incomeList.length > 0) {
@@ -55,7 +57,25 @@ function CardInfo({ budgetList, incomeList }) {
     setTotalBudget(totalBudget_);
     setTotalSpend(totalSpend_);
   };
+  const handleChange = (event) => {
+    setInputText(event.target.value);
+  };
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      const fetchFinancialAdvice = async () => {
+        const advice = await askAdvice(
+          totalBudget,
+          totalIncome,
+          totalSpend,
+          inputText
+        );
+        setFinancialAdvice(advice);
+      };
 
+      fetchFinancialAdvice();
+      setInputText(""); // Optionally clear the input field after sending
+    }
+  };
   return (
     <div>
       {budgetList?.length > 0 ? (
@@ -63,7 +83,7 @@ function CardInfo({ budgetList, incomeList }) {
           <div className="p-7 border mt-4 -mb-1 rounded-2xl flex items-center justify-between">
             <div className="">
               <div className="flex mb-2 flex-row space-x-1 items-center ">
-                <h2 className="text-md ">Finan Smart AI</h2>
+                <h2 className="text-md ">Smart Assistant</h2>
                 <Sparkles
                   className="rounded-full text-white w-10 h-10 p-2
     bg-gradient-to-r
@@ -76,6 +96,16 @@ function CardInfo({ budgetList, incomeList }) {
               <h2 className="font-light text-md">
                 {financialAdvice || "Loading financial advice..."}
               </h2>
+              <div className=" items-center py-2">
+              <input
+                type="text"
+                placeholder="Ask for any financial advice related to your data..."
+                value={inputText}
+                onKeyPress={handleKeyPress}
+                onChange={handleChange}
+                className="border border-gray-300 rounded-lg p-3 w-full max-w-6xl bg-white shadow-sm"
+              />
+              </div>
             </div>
           </div>
 
@@ -84,7 +114,7 @@ function CardInfo({ budgetList, incomeList }) {
               <div>
                 <h2 className="text-sm">Total Budget</h2>
                 <h2 className="font-bold text-2xl">
-                  ${formatNumber(totalBudget)}
+                ₹{formatNumber(totalBudget)}
                 </h2>
               </div>
               <PiggyBank className="bg-blue-800 p-3 h-12 w-12 rounded-full text-white" />
@@ -93,7 +123,7 @@ function CardInfo({ budgetList, incomeList }) {
               <div>
                 <h2 className="text-sm">Total Spend</h2>
                 <h2 className="font-bold text-2xl">
-                  ${formatNumber(totalSpend)}
+                ₹{formatNumber(totalSpend)}
                 </h2>
               </div>
               <ReceiptText className="bg-blue-800 p-3 h-12 w-12 rounded-full text-white" />
@@ -109,7 +139,7 @@ function CardInfo({ budgetList, incomeList }) {
               <div>
                 <h2 className="text-sm">Sum of Income Streams</h2>
                 <h2 className="font-bold text-2xl">
-                  ${formatNumber(totalIncome)}
+                ₹{formatNumber(totalIncome)}
                 </h2>
               </div>
               <CircleDollarSign className="bg-blue-800 p-3 h-12 w-12 rounded-full text-white" />

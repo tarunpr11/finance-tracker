@@ -51,7 +51,7 @@ function CreateIncomes({ refreshData }) {
       <Dialog>
         <DialogTrigger asChild>
           <div
-            className="bg-slate-100 p-10 rounded-2xl
+            className="bg-sky-100 p-10 rounded-2xl
             items-center flex flex-col border-2 border-dashed
             cursor-pointer hover:shadow-md"
           >
@@ -80,7 +80,7 @@ function CreateIncomes({ refreshData }) {
                     }}
                   />
                 </div>
-                <div className="mt-2">
+                <div className="mt-2 ">
                   <h2 className="text-black font-medium my-1">Source Name</h2>
                   <Input
                     placeholder="e.g. Youtube"
@@ -88,10 +88,10 @@ function CreateIncomes({ refreshData }) {
                   />
                 </div>
                 <div className="mt-2">
-                  <h2 className="text-black font-medium my-1">Montly Amount</h2>
+                  <h2 className="text-black font-medium my-1">Monthly Amount</h2>
                   <Input
                     type="number"
-                    placeholder="e.g. 5000$"
+                    placeholder="e.g. 5000₹"
                     onChange={(e) => setAmount(e.target.value)}
                   />
                 </div>

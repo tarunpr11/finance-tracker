@@ -1,6 +1,6 @@
 "use client"; // Add this line
 
-import { Auth } from "aws-amplify";
+import { Auth } from 'aws-amplify';
 import { useState } from "react";
 
 export default function Page() {
